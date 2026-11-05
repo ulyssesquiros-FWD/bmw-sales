@@ -199,5 +199,85 @@ export const modulosService = {
   getReporteResumen: async () => {
     const res = await api.get('/reportes/resumen-ejecutivo');
     return res.data;
+  },
+
+  // 11. Cotizaciones Formales
+  getCotizaciones: async (params) => {
+    const res = await api.get('/cotizaciones', { params });
+    return res.data;
+  },
+  createCotizacion: async (payload) => {
+    const res = await api.post('/cotizaciones', payload);
+    return res.data;
+  },
+
+  // 12. Facturación Electrónica CFDI
+  getFacturas: async (params) => {
+    const res = await api.get('/facturas', { params });
+    return res.data;
+  },
+  createFactura: async (payload) => {
+    const res = await api.post('/facturas', payload);
+    return res.data;
+  },
+
+  // 13. Pedidos a Planta de Fabricación BMW
+  getPedidosFabrica: async (params) => {
+    const res = await api.get('/pedidos-fabrica', { params });
+    return res.data;
+  },
+  createPedidoFabrica: async (payload) => {
+    const res = await api.post('/pedidos-fabrica', payload);
+    return res.data;
+  },
+
+  // 14. Inspecciones CPO 110 Puntos BMW Premium Selection
+  getInspeccionesCpo: async () => {
+    const res = await api.get('/inspecciones-cpo');
+    return res.data;
+  },
+  createInspeccionCpo: async (payload) => {
+    const res = await api.post('/inspecciones-cpo', payload);
+    return res.data;
+  },
+
+  // 15. Campañas y Eventos de Marketing
+  getCampanasMarketing: async () => {
+    const res = await api.get('/campanas-marketing');
+    return res.data;
+  },
+  createCampanaMarketing: async (payload) => {
+    const res = await api.post('/campanas-marketing', payload);
+    return res.data;
+  },
+
+  // 16. Encuestas de Satisfacción CSI / NPS
+  getEncuestasSatisfaccion: async () => {
+    const res = await api.get('/encuestas-satisfaccion');
+    return res.data;
+  },
+  createEncuestaSatisfaccion: async (payload) => {
+    const res = await api.post('/encuestas-satisfaccion', payload);
+    return res.data;
+  },
+
+  // 17. Almacén de Refacciones y Consumibles Técnicos
+  getAlmacenRefacciones: async (params) => {
+    const res = await api.get('/almacen-refacciones', { params });
+    return res.data;
+  },
+  createAlmacenRefaccion: async (payload) => {
+    const res = await api.post('/almacen-refacciones', payload);
+    return res.data;
+  },
+
+  // 18. Reclamaciones de Garantía con BMW AG
+  getReclamacionesGarantia: async (params) => {
+    const res = await api.get('/reclamaciones-garantia', { params });
+    return res.data;
+  },
+  createReclamacionGarantia: async (payload) => {
+    const res = await api.post('/reclamaciones-garantia', payload);
+    return res.data;
   }
 };

@@ -104,7 +104,7 @@ async function runMigrations() {
 
       console.log(`  [EJECUTANDO] Aplicando migración '${fileName}'...`);
       for (const stmt of statements) {
-        await connection.execute(stmt);
+        await connection.query(stmt);
       }
 
       await connection.execute(

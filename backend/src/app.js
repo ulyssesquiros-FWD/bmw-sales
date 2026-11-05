@@ -19,6 +19,14 @@ const pruebaManejoRoutes = require('./routes/pruebaManejoRoutes');
 const seguroRoutes = require('./routes/seguroRoutes');
 const auditoriaLogRoutes = require('./routes/auditoriaLogRoutes');
 const reporteRoutes = require('./routes/reporteRoutes');
+const cotizacionRoutes = require('./routes/cotizacionRoutes');
+const facturaRoutes = require('./routes/facturaRoutes');
+const pedidoFabricaRoutes = require('./routes/pedidoFabricaRoutes');
+const inspeccionCpoRoutes = require('./routes/inspeccionCpoRoutes');
+const campanaMarketingRoutes = require('./routes/campanaMarketingRoutes');
+const encuestaSatisfaccionRoutes = require('./routes/encuestaSatisfaccionRoutes');
+const almacenRefaccionRoutes = require('./routes/almacenRefaccionRoutes');
+const reclamacionGarantiaRoutes = require('./routes/reclamacionGarantiaRoutes');
 const authMiddleware = require('./middleware/authMiddleware');
 const { AppError, notFoundHandler, errorHandler } = require('./middleware/errorHandler');
 
@@ -134,6 +142,14 @@ app.use('/api/pruebas-manejo', authMiddleware, pruebaManejoRoutes);
 app.use('/api/seguros', authMiddleware, seguroRoutes);
 app.use('/api/auditoria-logs', authMiddleware, auditoriaLogRoutes);
 app.use('/api/reportes', authMiddleware, reporteRoutes);
+app.use('/api/cotizaciones', authMiddleware, cotizacionRoutes);
+app.use('/api/facturas', authMiddleware, facturaRoutes);
+app.use('/api/pedidos-fabrica', authMiddleware, pedidoFabricaRoutes);
+app.use('/api/inspecciones-cpo', authMiddleware, inspeccionCpoRoutes);
+app.use('/api/campanas-marketing', authMiddleware, campanaMarketingRoutes);
+app.use('/api/encuestas-satisfaccion', authMiddleware, encuestaSatisfaccionRoutes);
+app.use('/api/almacen-refacciones', authMiddleware, almacenRefaccionRoutes);
+app.use('/api/reclamaciones-garantia', authMiddleware, reclamacionGarantiaRoutes);
 
 // Manejo de rutas inexistentes y errores centralizados
 app.use(notFoundHandler);
