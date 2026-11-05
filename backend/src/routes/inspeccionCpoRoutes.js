@@ -18,3 +18,4 @@ router.get('/:id', param('id').isInt().withMessage('ID inválido.'), validateReq
 router.post('/', validarInspeccion, inspeccionCpoController.registrarInspeccion);
 
 module.exports = router;
+

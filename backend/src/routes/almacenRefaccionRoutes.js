@@ -19,3 +19,4 @@ router.get('/:id', param('id').isInt().withMessage('ID inválido.'), validateReq
 router.post('/', validarRefaccion, almacenRefaccionController.registrarRefaccion);
 
 module.exports = router;
+

@@ -23,3 +23,4 @@ router.put('/:id', param('id').isInt().withMessage('ID inválido.'), validateReq
 router.delete('/:id', param('id').isInt().withMessage('ID inválido.'), validateRequest, cotizacionController.eliminarCotizacion);
 
 module.exports = router;
+

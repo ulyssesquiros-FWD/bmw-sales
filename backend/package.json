@@ -8,7 +8,10 @@
     "start": "node src/server.js",
     "db:init": "node src/database/initDatabase.js",
     "db:migrate": "node src/database/migrate.js",
-    "db:seed:modulos": "node src/database/seedModulosAdicionales.js"
+    "db:seed:modulos": "node src/database/seedModulosAdicionales.js",
+    "db:seed:grande": "node src/database/seedGrande.js",
+    "db:seed:nuevas": "node src/database/seedNuevasEntidades.js",
+    "db:seed:all": "node src/database/seedModulosAdicionales.js && node src/database/seedGrande.js && node src/database/seedNuevasEntidades.js"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",

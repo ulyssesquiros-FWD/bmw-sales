@@ -19,3 +19,4 @@ const registrarInspeccion = asyncHandler(async (req, res) => {
 });
 
 module.exports = { listarInspecciones, obtenerInspeccionPorId, registrarInspeccion };
+

@@ -20,3 +20,4 @@ const registrarRefaccion = asyncHandler(async (req, res) => {
 });
 
 module.exports = { listarRefacciones, obtenerRefaccionPorId, registrarRefaccion };
+

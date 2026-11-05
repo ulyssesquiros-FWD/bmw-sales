@@ -19,3 +19,4 @@ const registrarEncuesta = asyncHandler(async (req, res) => {
 });
 
 module.exports = { listarEncuestas, obtenerEncuestaPorId, registrarEncuesta };
+

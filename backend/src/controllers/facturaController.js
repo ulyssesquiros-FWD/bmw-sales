@@ -20,3 +20,4 @@ const emitirFactura = asyncHandler(async (req, res) => {
 });
 
 module.exports = { listarFacturas, obtenerFacturaPorId, emitirFactura };
+

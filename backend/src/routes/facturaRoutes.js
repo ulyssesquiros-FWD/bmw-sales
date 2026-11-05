@@ -19,3 +19,4 @@ router.get('/:id', param('id').isInt().withMessage('ID inválido.'), validateReq
 router.post('/', validarFactura, facturaController.emitirFactura);
 
 module.exports = router;
+

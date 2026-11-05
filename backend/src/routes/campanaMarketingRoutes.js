@@ -19,3 +19,4 @@ router.get('/:id', param('id').isInt().withMessage('ID inválido.'), validateReq
 router.post('/', validarCampana, campanaMarketingController.crearCampana);
 
 module.exports = router;
+

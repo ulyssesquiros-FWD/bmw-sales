@@ -20,3 +20,4 @@ const registrarReclamacion = asyncHandler(async (req, res) => {
 });
 
 module.exports = { listarReclamaciones, obtenerReclamacionPorId, registrarReclamacion };
+

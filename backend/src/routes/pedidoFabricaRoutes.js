@@ -20,3 +20,4 @@ router.post('/', validarPedido, pedidoFabricaController.crearPedido);
 router.patch('/:id/estado', param('id').isInt().withMessage('ID inválido.'), validateRequest, pedidoFabricaController.actualizarEstadoPedido);
 
 module.exports = router;
+

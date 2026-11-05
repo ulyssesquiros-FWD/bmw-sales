@@ -61,3 +61,4 @@ async function updateEstado(id, nuevoEstado) {
 }
 
 module.exports = { findAll, findById, create, updateEstado };
+

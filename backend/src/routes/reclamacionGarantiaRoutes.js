@@ -20,3 +20,4 @@ router.get('/:id', param('id').isInt().withMessage('ID inválido.'), validateReq
 router.post('/', validarReclamacion, reclamacionGarantiaController.registrarReclamacion);
 
 module.exports = router;
+

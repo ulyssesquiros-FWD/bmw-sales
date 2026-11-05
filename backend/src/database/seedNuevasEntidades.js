@@ -415,3 +415,4 @@ seedNuevasEntidades().catch((err) => {
   console.error('[ERROR SEED NUEVAS ENTIDADES]:', err);
   process.exit(1);
 });
+

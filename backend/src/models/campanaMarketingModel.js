@@ -40,3 +40,4 @@ async function create(data) {
 }
 
 module.exports = { findAll, findById, create };
+

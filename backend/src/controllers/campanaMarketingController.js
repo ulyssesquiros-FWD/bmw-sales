@@ -19,3 +19,4 @@ const crearCampana = asyncHandler(async (req, res) => {
 });
 
 module.exports = { listarCampanas, obtenerCampanaPorId, crearCampana };
+
