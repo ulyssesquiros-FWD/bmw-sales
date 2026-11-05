@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Topbar from './Topbar';
+import AIFloatingWidget from '../ai/AIFloatingWidget';
 
 export default function MainLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -15,6 +16,7 @@ export default function MainLayout() {
           <Outlet />
         </main>
       </div>
+      <AIFloatingWidget />
     </div>
   );
 }

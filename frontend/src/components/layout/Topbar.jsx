@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { Menu, LogOut, UserCheck, Wrench, Calculator, BarChart3 } from 'lucide-react';
+import { Menu, LogOut, UserCheck, Wrench, Calculator, BarChart3, Sparkles } from 'lucide-react';
 import { BmwRoundel, BmwMEmblem } from '../common/BmwLogos';
 import { dashboardService } from '../../services/dashboardService';
 import { useAuth } from '../../context/AuthContext';
@@ -90,6 +90,14 @@ export default function Topbar({ onToggleSidebar }) {
           >
             <BarChart3 size={13} style={{ marginRight: '4px' }} />
             Analytics BI
+          </NavLink>
+          <NavLink
+            to="/asistente-ia"
+            className={({ isActive }) => `topbar-nav-item ${isActive ? 'active' : ''}`}
+            style={{ color: '#38bdf8', fontWeight: 700 }}
+          >
+            <Sparkles size={13} style={{ marginRight: '4px' }} />
+            Genius AI
           </NavLink>
         </nav>
       </div>

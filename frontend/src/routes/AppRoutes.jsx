@@ -16,6 +16,7 @@ import FinanciamientoSimulador from '../pages/FinanciamientoSimulador';
 import PruebasManejo from '../pages/PruebasManejo';
 import SucursalesRed from '../pages/SucursalesRed';
 import ServiciosEmpresariales from '../pages/ServiciosEmpresariales';
+import AsistenteIA from '../pages/AsistenteIA';
 import NotFound from '../pages/NotFound';
 import { useAuth } from '../context/AuthContext';
 
@@ -62,7 +63,8 @@ export default function AppRoutes() {
           <Route path="/financiamiento" element={<FinanciamientoSimulador />} />
           <Route path="/sucursales" element={<SucursalesRed />} />
 
-          {/* Inteligencia de Negocio & Ecosistema 360 */}
+          {/* Inteligencia de Negocio, Asistente IA & Ecosistema 360 */}
+          <Route path="/asistente-ia" element={<AsistenteIA />} />
           <Route path="/reportes" element={<ReportesAnalytics />} />
           <Route path="/ecosistema" element={<ServiciosEmpresariales />} />
 

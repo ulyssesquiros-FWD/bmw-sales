@@ -13,6 +13,7 @@ import {
   Building2,
   BarChart3,
   ShieldCheck,
+  Cpu,
   LogOut
 } from 'lucide-react';
 import { BmwRoundel, BmwMEmblem } from '../common/BmwLogos';
@@ -48,6 +49,7 @@ const NAV_GROUPS = [
   {
     titulo: 'Inteligencia & BI',
     items: [
+      { to: '/asistente-ia', label: 'BMW Genius AI (DeepSeek)', icon: Cpu },
       { to: '/reportes', label: 'Reportes & Analytics BI', icon: BarChart3 },
       { to: '/ecosistema', label: 'Ecosistema Integral 360°', icon: ShieldCheck }
     ]

@@ -27,6 +27,7 @@ const campanaMarketingRoutes = require('./routes/campanaMarketingRoutes');
 const encuestaSatisfaccionRoutes = require('./routes/encuestaSatisfaccionRoutes');
 const almacenRefaccionRoutes = require('./routes/almacenRefaccionRoutes');
 const reclamacionGarantiaRoutes = require('./routes/reclamacionGarantiaRoutes');
+const aiRoutes = require('./routes/aiRoutes');
 const authMiddleware = require('./middleware/authMiddleware');
 const { AppError, notFoundHandler, errorHandler } = require('./middleware/errorHandler');
 
@@ -150,6 +151,7 @@ app.use('/api/campanas-marketing', authMiddleware, campanaMarketingRoutes);
 app.use('/api/encuestas-satisfaccion', authMiddleware, encuestaSatisfaccionRoutes);
 app.use('/api/almacen-refacciones', authMiddleware, almacenRefaccionRoutes);
 app.use('/api/reclamaciones-garantia', authMiddleware, reclamacionGarantiaRoutes);
+app.use('/api/ai', authMiddleware, aiRoutes);
 
 // Manejo de rutas inexistentes y errores centralizados
 app.use(notFoundHandler);

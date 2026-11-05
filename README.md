@@ -1,6 +1,7 @@
-# BMW Premium Motors — Sistema Empresarial Full Stack (25 Controladores & 24 Entidades MySQL)
+# BMW Premium Motors — Sistema Empresarial Full Stack (26 Controladores & 24 Entidades MySQL + Agente DeepSeek AI)
 
 [![GitHub Repository](https://img.shields.io/badge/GitHub-ulyssesquiros--FWD%2Fbmw--sales-181717?style=for-the-badge&logo=github)](https://github.com/ulyssesquiros-FWD/bmw-sales)
+[![DeepSeek](https://img.shields.io/badge/AI_Agent-DeepSeek_V3_%2F_Flash-4D6BFE?style=for-the-badge&logo=openai)](https://deepseek.com/)
 [![React](https://img.shields.io/badge/React_18-Vite_6-61DAFB?style=for-the-badge&logo=react)](https://react.dev/)
 [![Node.js](https://img.shields.io/badge/Node.js-Express_4-339933?style=for-the-badge&logo=node.js)](https://nodejs.org/)
 [![MySQL](https://img.shields.io/badge/MySQL-InnoDB_8.0-4479A1?style=for-the-badge&logo=mysql)](https://www.mysql.com/)
@@ -14,8 +15,8 @@ Para acceder al sistema a través de la interfaz web ([http://localhost:5173/log
 
 | Perfil | Correo Electrónico | Contraseña | Nivel de Acceso |
 | :--- | :--- | :--- | :--- |
-| **Usuario Ejecutivo (Ulysses)** | `ulysses@bmwpremiummotors.com` | `AdminBMW2026!` | Acceso Total (25 Controladores y 24 Entidades) |
-| **Administrador General** | `admin@bmwpremiummotors.com` | `AdminBMW2026!` | Acceso Total (25 Controladores y 24 Entidades) |
+| **Usuario Ejecutivo (Ulysses)** | `ulysses@bmwpremiummotors.com` | `AdminBMW2026!` | Acceso Total (26 Controladores, 24 Entidades e IA) |
+| **Administrador General** | `admin@bmwpremiummotors.com` | `AdminBMW2026!` | Acceso Total (26 Controladores, 24 Entidades e IA) |
 
 > **Nota de Seguridad:** Las contraseñas están almacenadas mediante hash adaptativo **`bcrypt` a 12 salt rounds**. Los tokens JWT emitidos se gestionan estrictamente en la memoria de la aplicación React (`AuthContext`), mitigando riesgos de almacenamiento inseguro en `localStorage` o `sessionStorage`.
 
@@ -28,7 +29,8 @@ Para acceder al sistema a través de la interfaz web ([http://localhost:5173/log
 ### Hitos y Arquitectura Evolutiva:
 - **Día 1:** Modelado relacional en MySQL de las 5 entidades comerciales (`modelos`, `vehiculos`, `clientes`, `vendedores`, `ventas`), transacciones ACID con `SELECT ... FOR UPDATE`, diseño editorial inspirado en `bmw.com`, logotipos vectoriales oficiales y visualizador fotográfico 360° por unidad.
 - **Día 2:** Incorporación de la entidad `usuarios`, sistema de migraciones incrementales idempotentes, autenticación segura basada en **JWT (`HS256`)**, middleware transversal en Express, control de fuerza bruta (*rate limiting*) y rutas privadas protegidas en React.
-- **Ampliación Empresarial 360°:** Expansión integral a **24 tablas relacionales en MySQL** y **25 controladores REST**, incorporando cotizaciones, facturas CFDI, pedidos a plantas de ensamble (Múnich, Spartanburg, Dingolfing, SLP), certificaciones 110 puntos CPO, campañas de marketing, encuestas de satisfacción CSI, almacén de refacciones técnicas y reclamaciones de garantía RMA.
+- **Ampliación Empresarial 360°:** Expansión integral a **24 tablas relacionales en MySQL** y **26 controladores REST**, incorporando cotizaciones, facturas CFDI, pedidos a plantas de ensamble (Múnich, Spartanburg, Dingolfing, SLP), certificaciones 110 puntos CPO, campañas de marketing, encuestas de satisfacción CSI, almacén de refacciones técnicas y reclamaciones de garantía RMA.
+- **Agente Inteligente BMW Genius AI (DeepSeek):** Integración de asistente cognitivo conectado mediante la API oficial de **DeepSeek (`deepseek-chat` / `deepseek-flash`)**, con inyección contextual en tiempo real (*RAG ligero*) de inventario, modelos ///M y métricas del concesionario, accesible mediante portal dedicado `/asistente-ia` y widget flotante omnicanal.
 
 ---
 
@@ -90,7 +92,7 @@ RECUENTO DE TABLAS EN LA BASE DE DATOS (bmw_premium_motors):
 
 ---
 
-## 5. Estructura de los 25 Controladores y Endpoints REST
+## 5. Estructura de los 26 Controladores y Endpoints REST
 
 Todos los endpoints empresariales requieren la cabecera `Authorization: Bearer <token>`:
 
@@ -121,6 +123,7 @@ Todos los endpoints empresariales requieren la cabecera `Authorization: Bearer <
 | 23 | `encuestaSatisfaccionController.js` | `/api/encuestas-satisfaccion` | `GET /`, `GET /:id`, `POST /` (CSI / NPS) |
 | 24 | `almacenRefaccionController.js` | `/api/almacen-refacciones` | `GET /`, `GET /:id`, `POST /` |
 | 25 | `reclamacionGarantiaController.js` | `/api/reclamaciones-garantia` | `GET /`, `GET /:id`, `POST /` (RMA ante BMW AG) |
+| 26 | `aiController.js` | `/api/ai` | `POST /chat`, `GET /sugerencias`, `GET /estado` (Motor DeepSeek AI) |
 
 ---
 
@@ -206,6 +209,7 @@ La aplicación cuenta con una barra de navegación organizada por departamentos:
 │   ├── /financiamiento    -> Simulador Financiero BMW Select & Líneas de Crédito
 │   └── /sucursales        -> Directorio de Agencias Masaryk, Santa Fe, MTY, GDL, etc.
 └── INTELIGENCIA & GESTIÓN
+    ├── /asistente-ia      -> BMW Genius AI Advisor (DeepSeek V3 / Flash con RAG de BD en Vivo)
     ├── /reportes          -> Business Intelligence, Rendimiento Asesores & Exportador CSV
     └── /ecosistema        -> Ecosistema 360° con Pestañas para las 24 Entidades
 ```
