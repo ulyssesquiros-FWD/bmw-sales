@@ -107,3 +107,4 @@ Se comprobó la consulta directa en consola MySQL:
 SELECT id_modelo, nombre, tipo_carroceria, combustible, transmision FROM modelos WHERE id_modelo = 1;
 ```
 Resultado: Fila persistida con `id_modelo = 1` y datos idénticos al payload enviado.
+

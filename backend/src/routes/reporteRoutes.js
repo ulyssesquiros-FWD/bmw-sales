@@ -9,3 +9,4 @@ router.get('/rendimiento-asesores', reporteController.rendimientoAsesores);
 router.get('/resumen-ejecutivo', reporteController.resumenEjecutivo);
 
 module.exports = router;
+

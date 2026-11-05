@@ -155,15 +155,22 @@ BMW/
 │   │   ├── context/
 │   │   │   └── AuthContext.jsx
 │   │   ├── pages/
-│   │   │   ├── Clientes.jsx
-│   │   │   ├── Dashboard.jsx
-│   │   │   ├── Login.jsx
-│   │   │   ├── Modelos.jsx
-│   │   │   ├── NotFound.jsx
-│   │   │   ├── Registro.jsx
-│   │   │   ├── Vehiculos.jsx
-│   │   │   ├── Vendedores.jsx
-│   │   │   └── Ventas.jsx
+│   │   │   ├── AccesoriosM.jsx (Boutique M Performance y Partes OEM)
+│   │   │   ├── Clientes.jsx (Gestión de Compradores VIP)
+│   │   │   ├── Dashboard.jsx (Showroom Ejecutivo y Salud de API)
+│   │   │   ├── FinanciamientoSimulador.jsx (Simulador Select y Líneas de Crédito)
+│   │   │   ├── Login.jsx (Acceso seguro con JWT en memoria)
+│   │   │   ├── Modelos.jsx (Catálogo de Líneas BMW y División ///M)
+│   │   │   ├── NotFound.jsx (Manejo 404 estilo BMW)
+│   │   │   ├── PruebasManejo.jsx (Test Drives VIP y Experiencias de Manejo)
+│   │   │   ├── Registro.jsx (Alta de operadores)
+│   │   │   ├── ReportesAnalytics.jsx (Business Intelligence & Finanzas USD)
+│   │   │   ├── ServiciosEmpresariales.jsx (Ecosistema 360 y Módulos Adicionales)
+│   │   │   ├── SucursalesRed.jsx (Directorio de Agencias Oficiales)
+│   │   │   ├── TallerMantenimiento.jsx (Órdenes de Trabajo y Bahías ISTA+)
+│   │   │   ├── Vehiculos.jsx (Inventario Físico y Vistas 360°)
+│   │   │   ├── Vendedores.jsx (Asesores Comerciales Certificados)
+│   │   │   └── Ventas.jsx (Operaciones de Venta y Transacciones ACID)
 │   │   ├── routes/
 │   │   │   └── AppRoutes.jsx
 │   │   ├── services/
@@ -172,6 +179,7 @@ BMW/
 │   │   │   ├── clienteService.js
 │   │   │   ├── dashboardService.js
 │   │   │   ├── modeloService.js
+│   │   │   ├── modulosService.js (Suite integral de 10 módulos y BI)
 │   │   │   ├── vehiculoService.js
 │   │   │   ├── vendedorService.js
 │   │   │   └── ventaService.js

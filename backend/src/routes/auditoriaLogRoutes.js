@@ -16,3 +16,4 @@ router.get('/:id', param('id').isInt().withMessage('ID inválido.'), validateReq
 router.post('/', validarEvento, auditoriaLogController.registrarEvento);
 
 module.exports = router;
+

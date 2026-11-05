@@ -9,6 +9,12 @@ import Vehiculos from '../pages/Vehiculos';
 import Clientes from '../pages/Clientes';
 import Vendedores from '../pages/Vendedores';
 import Ventas from '../pages/Ventas';
+import ReportesAnalytics from '../pages/ReportesAnalytics';
+import AccesoriosM from '../pages/AccesoriosM';
+import TallerMantenimiento from '../pages/TallerMantenimiento';
+import FinanciamientoSimulador from '../pages/FinanciamientoSimulador';
+import PruebasManejo from '../pages/PruebasManejo';
+import SucursalesRed from '../pages/SucursalesRed';
 import ServiciosEmpresariales from '../pages/ServiciosEmpresariales';
 import NotFound from '../pages/NotFound';
 import { useAuth } from '../context/AuthContext';
@@ -34,17 +40,32 @@ export default function AppRoutes() {
         <Route path="/registro" element={<Registro />} />
       </Route>
 
-      {/* Rutas privadas empresariales protegidas por JWT en memoria */}
+      {/* Rutas privadas empresariales protegidas por JWT */}
       <Route element={<RutaProtegida />}>
         <Route element={<MainLayout />}>
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          
+          {/* Showroom & Ventas */}
           <Route path="/modelos" element={<Modelos />} />
           <Route path="/vehiculos" element={<Vehiculos />} />
           <Route path="/clientes" element={<Clientes />} />
           <Route path="/vendedores" element={<Vendedores />} />
           <Route path="/ventas" element={<Ventas />} />
+
+          {/* Posventa & Servicios M */}
+          <Route path="/taller" element={<TallerMantenimiento />} />
+          <Route path="/accesorios" element={<AccesoriosM />} />
+          <Route path="/pruebas-manejo" element={<PruebasManejo />} />
+
+          {/* Finanzas & Red */}
+          <Route path="/financiamiento" element={<FinanciamientoSimulador />} />
+          <Route path="/sucursales" element={<SucursalesRed />} />
+
+          {/* Inteligencia de Negocio & Ecosistema 360 */}
+          <Route path="/reportes" element={<ReportesAnalytics />} />
           <Route path="/ecosistema" element={<ServiciosEmpresariales />} />
+
           <Route path="*" element={<NotFound />} />
         </Route>
       </Route>

@@ -60,3 +60,4 @@ En la industria de distribución automotriz de lujo, los concesionarios enfrenta
 1. **Disminución a cero de incidentes de sobreventa:** Gracias a la restricción `uq_ventas_vehiculo` y al bloqueo `FOR UPDATE`.
 2. **Protección de márgenes y auditoría de precios:** Validación estricta de importes positivos y conservación histórica del precio pactado en la venta, independiente de futuras fluctuaciones en el precio de lista del vehículo.
 3. **Escalabilidad y Seguridad:** Incorporación de acceso protegido con JSON Web Tokens (`HS256`, 1 hora de vigencia), cifrado `bcrypt` de 12 rondas y almacenamiento de sesión seguro en memoria de React, protegiendo los datos patrimoniales y comerciales del concesionario contra accesos no autorizados y ataques XSS/CSRF.
+

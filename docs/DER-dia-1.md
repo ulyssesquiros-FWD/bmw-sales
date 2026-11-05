@@ -85,3 +85,4 @@ erDiagram
 - **`clientes` 1:N `ventas`:** Un cliente puede adquirir uno o más vehículos en el concesionario.
 - **`vendedores` 1:N `ventas`:** Un asesor comercial puede registrar múltiples operaciones de venta.
 - **`vehiculos` 1:0..1 `ventas`:** Una unidad física de inventario puede o no estar vendida, pero gracias a la restricción `UNIQUE (id_vehiculo)` en la tabla `ventas`, jamás puede asignarse a más de una venta en toda la vida del sistema.
+

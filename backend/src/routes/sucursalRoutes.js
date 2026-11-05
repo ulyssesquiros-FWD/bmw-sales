@@ -20,3 +20,4 @@ router.put('/:id', param('id').isInt().withMessage('ID inválido.'), validarSucu
 router.delete('/:id', param('id').isInt().withMessage('ID inválido.'), validateRequest, sucursalController.eliminarSucursal);
 
 module.exports = router;
+

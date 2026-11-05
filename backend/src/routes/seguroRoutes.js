@@ -22,3 +22,4 @@ router.put('/:id', param('id').isInt().withMessage('ID inválido.'), validarSegu
 router.delete('/:id', param('id').isInt().withMessage('ID inválido.'), validateRequest, seguroController.eliminarSeguro);
 
 module.exports = router;
+

@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { Menu, LogOut, UserCheck } from 'lucide-react';
+import { Menu, LogOut, UserCheck, Wrench, Calculator, BarChart3 } from 'lucide-react';
 import { BmwRoundel, BmwMEmblem } from '../common/BmwLogos';
 import { dashboardService } from '../../services/dashboardService';
 import { useAuth } from '../../context/AuthContext';
@@ -48,7 +48,7 @@ export default function Topbar({ onToggleSidebar }) {
               <BmwMEmblem height={14} />
             </div>
             <div className="topbar-slogan">
-              Sheer Driving Pleasure • Showroom &amp; Gestión Comercial
+              Sheer Driving Pleasure • Showroom &amp; Gestión Corporativa
             </div>
           </div>
         </Link>
@@ -64,23 +64,32 @@ export default function Topbar({ onToggleSidebar }) {
             to="/vehiculos"
             className={({ isActive }) => `topbar-nav-item ${isActive ? 'active' : ''}`}
           >
-            Showroom Vehículos
+            Showroom
           </NavLink>
           <Link to="/vehiculos?serie=M" className="topbar-nav-item">
             <BmwMEmblem height={12} />
             <span>Gama M</span>
           </Link>
           <NavLink
-            to="/ventas"
+            to="/taller"
             className={({ isActive }) => `topbar-nav-item ${isActive ? 'active' : ''}`}
           >
-            Ventas
+            <Wrench size={13} style={{ marginRight: '4px' }} />
+            Taller ISTA+
           </NavLink>
           <NavLink
-            to="/ecosistema"
+            to="/financiamiento"
             className={({ isActive }) => `topbar-nav-item ${isActive ? 'active' : ''}`}
           >
-            Servicios &amp; Posventa
+            <Calculator size={13} style={{ marginRight: '4px' }} />
+            Financiamiento
+          </NavLink>
+          <NavLink
+            to="/reportes"
+            className={({ isActive }) => `topbar-nav-item ${isActive ? 'active' : ''}`}
+          >
+            <BarChart3 size={13} style={{ marginRight: '4px' }} />
+            Analytics BI
           </NavLink>
         </nav>
       </div>

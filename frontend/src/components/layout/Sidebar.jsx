@@ -6,20 +6,52 @@ import {
   Users,
   Briefcase,
   BadgeDollarSign,
+  Wrench,
   Sparkles,
+  Compass,
+  Calculator,
+  Building2,
+  BarChart3,
+  ShieldCheck,
   LogOut
 } from 'lucide-react';
 import { BmwRoundel, BmwMEmblem } from '../common/BmwLogos';
 import { useAuth } from '../../context/AuthContext';
 
-const NAV_ITEMS = [
-  { to: '/dashboard', label: 'Showroom & Dashboard', icon: LayoutDashboard, end: true },
-  { to: '/modelos', label: 'Modelos BMW & ///M', icon: Layers },
-  { to: '/vehiculos', label: 'Inventario & Vistas', icon: CarFront },
-  { to: '/clientes', label: 'Clientes', icon: Users },
-  { to: '/vendedores', label: 'Asesores BMW', icon: Briefcase },
-  { to: '/ventas', label: 'Operaciones de Venta', icon: BadgeDollarSign },
-  { to: '/ecosistema', label: 'Ecosistema & Posventa', icon: Sparkles }
+const NAV_GROUPS = [
+  {
+    titulo: 'Showroom & Comercial',
+    items: [
+      { to: '/dashboard', label: 'Showroom & Dashboard', icon: LayoutDashboard, end: true },
+      { to: '/modelos', label: 'Modelos BMW & ///M', icon: Layers },
+      { to: '/vehiculos', label: 'Inventario & 360°', icon: CarFront },
+      { to: '/clientes', label: 'Clientes VIP', icon: Users },
+      { to: '/vendedores', label: 'Asesores BMW', icon: Briefcase },
+      { to: '/ventas', label: 'Operaciones de Venta', icon: BadgeDollarSign }
+    ]
+  },
+  {
+    titulo: 'Posventa & Servicios M',
+    items: [
+      { to: '/taller', label: 'Taller & Bahías ISTA+', icon: Wrench },
+      { to: '/accesorios', label: 'Boutique M Performance', icon: Sparkles },
+      { to: '/pruebas-manejo', label: 'Pruebas de Manejo VIP', icon: Compass }
+    ]
+  },
+  {
+    titulo: 'Finanzas & Red Oficial',
+    items: [
+      { to: '/financiamiento', label: 'Simulador Financiero', icon: Calculator },
+      { to: '/sucursales', label: 'Red de Concesionarios', icon: Building2 }
+    ]
+  },
+  {
+    titulo: 'Inteligencia & BI',
+    items: [
+      { to: '/reportes', label: 'Reportes & Analytics BI', icon: BarChart3 },
+      { to: '/ecosistema', label: 'Ecosistema Integral 360°', icon: ShieldCheck }
+    ]
+  }
 ];
 
 export default function Sidebar({ isOpen, onClose }) {
@@ -57,18 +89,22 @@ export default function Sidebar({ isOpen, onClose }) {
         </div>
 
         <nav className="sidebar-nav" aria-label="Navegación principal">
-          <div className="sidebar-section-label">Experiencia BMW</div>
-          {NAV_ITEMS.map(({ to, label, icon: Icon, end }) => (
-            <NavLink
-              key={to}
-              to={to}
-              end={end}
-              onClick={onClose}
-              className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}
-            >
-              <Icon size={18} />
-              <span>{label}</span>
-            </NavLink>
+          {NAV_GROUPS.map((group) => (
+            <div key={group.titulo} style={{ marginBottom: '0.85rem' }}>
+              <div className="sidebar-section-label">{group.titulo}</div>
+              {group.items.map(({ to, label, icon: Icon, end }) => (
+                <NavLink
+                  key={to}
+                  to={to}
+                  end={end}
+                  onClick={onClose}
+                  className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}
+                >
+                  <Icon size={17} />
+                  <span>{label}</span>
+                </NavLink>
+              ))}
+            </div>
           ))}
         </nav>
 
