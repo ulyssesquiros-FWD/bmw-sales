@@ -14,8 +14,10 @@ export default function VehiclePlaceholder({
   const [imgError, setImgError] = useState(false);
 
   const fallbackGallery = getModelGalleryByText(modeloNombre, version, anio, color);
+  const isExternalGeneric = imagenUrl && (imagenUrl.includes('unsplash.com') || imagenUrl.startsWith('http://') || imagenUrl.startsWith('https://'));
+  const safeImageUrl = isExternalGeneric ? null : imagenUrl;
   const resolvedSrc =
-    imagenUrl && imagenUrl.trim() && !imgError ? imagenUrl.trim() : fallbackGallery[0]?.url;
+    safeImageUrl && safeImageUrl.trim() && !imgError ? safeImageUrl.trim() : fallbackGallery[0]?.url;
 
   useEffect(() => {
     setImgError(false);

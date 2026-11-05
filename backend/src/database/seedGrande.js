@@ -123,7 +123,7 @@ async function seedGrande() {
         kilometraje: 120,
         precio: 46800.00,
         estado: 'Disponible',
-        imagen_url: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1200&q=80'
+        imagen_url: '/vehicles/serie2-front.jpg'
       },
       {
         id_modelo: modeloMap['BMW Serie 4 Gran Coupé'],
@@ -134,7 +134,7 @@ async function seedGrande() {
         kilometraje: 350,
         precio: 67900.00,
         estado: 'Disponible',
-        imagen_url: 'https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=1200&q=80'
+        imagen_url: '/vehicles/serie4-front.jpg'
       },
       {
         id_modelo: modeloMap['BMW Serie 7 Sedán Limousine'],
@@ -145,7 +145,7 @@ async function seedGrande() {
         kilometraje: 1500,
         precio: 124500.00,
         estado: 'Disponible',
-        imagen_url: 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=1200&q=80'
+        imagen_url: '/vehicles/serie7-front.jpg'
       },
       {
         id_modelo: modeloMap['BMW Serie 8 Coupé'],
@@ -156,7 +156,7 @@ async function seedGrande() {
         kilometraje: 4200,
         precio: 139000.00,
         estado: 'Reservado',
-        imagen_url: 'https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=1200&q=80'
+        imagen_url: '/vehicles/serie8-front.jpg'
       },
       {
         id_modelo: modeloMap['BMW X1'],
@@ -167,7 +167,7 @@ async function seedGrande() {
         kilometraje: 50,
         precio: 44900.00,
         estado: 'Disponible',
-        imagen_url: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80'
+        imagen_url: '/vehicles/x1-front.jpg'
       },
       {
         id_modelo: modeloMap['BMW X7'],
@@ -178,7 +178,7 @@ async function seedGrande() {
         kilometraje: 2100,
         precio: 128900.00,
         estado: 'Disponible',
-        imagen_url: 'https://images.unsplash.com/photo-1542362567-b07e5359815e?auto=format&fit=crop&w=1200&q=80'
+        imagen_url: '/vehicles/x7-front.jpg'
       },
       {
         id_modelo: modeloMap['BMW XM'],
@@ -189,7 +189,7 @@ async function seedGrande() {
         kilometraje: 890,
         precio: 168000.00,
         estado: 'Disponible',
-        imagen_url: 'https://images.unsplash.com/photo-1525609004556-c46c7d6cf023?auto=format&fit=crop&w=1200&q=80'
+        imagen_url: '/vehicles/xm-front.jpg'
       },
       {
         id_modelo: modeloMap['BMW Z4 Roadster'],
@@ -200,7 +200,7 @@ async function seedGrande() {
         kilometraje: 6300,
         precio: 72500.00,
         estado: 'Disponible',
-        imagen_url: 'https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=1200&q=80'
+        imagen_url: '/vehicles/z4-front.jpg'
       },
       {
         id_modelo: modeloMap['BMW iX'],
@@ -211,7 +211,7 @@ async function seedGrande() {
         kilometraje: 800,
         precio: 104500.00,
         estado: 'Disponible',
-        imagen_url: 'https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=1200&q=80'
+        imagen_url: '/vehicles/ix-front.jpg'
       },
       {
         id_modelo: modeloMap['BMW i7'],
@@ -222,7 +222,7 @@ async function seedGrande() {
         kilometraje: 1200,
         precio: 148500.00,
         estado: 'Disponible',
-        imagen_url: 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1200&q=80'
+        imagen_url: '/vehicles/i7-front.jpg'
       },
       {
         id_modelo: modeloMap['BMW M3 Sedán'],
@@ -233,7 +233,7 @@ async function seedGrande() {
         kilometraje: 450,
         precio: 129500.00,
         estado: 'Disponible',
-        imagen_url: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1200&q=80'
+        imagen_url: '/vehicles/m3-g80-front.jpg'
       },
       {
         id_modelo: modeloMap['BMW M4 Coupé'],
@@ -244,7 +244,7 @@ async function seedGrande() {
         kilometraje: 1800,
         precio: 142000.00,
         estado: 'Reservado',
-        imagen_url: 'https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=1200&q=80'
+        imagen_url: '/vehicles/m4-g82-front.jpg'
       },
       {
         id_modelo: modeloMap['BMW X5 M'],
@@ -255,7 +255,7 @@ async function seedGrande() {
         kilometraje: 2800,
         precio: 138900.00,
         estado: 'Disponible',
-        imagen_url: 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=1200&q=80'
+        imagen_url: '/vehicles/x5-g05-front.jpg'
       },
       {
         id_modelo: modeloMap['BMW Serie 3'],
@@ -266,7 +266,7 @@ async function seedGrande() {
         kilometraje: 950,
         precio: 59800.00,
         estado: 'Disponible',
-        imagen_url: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1200&q=80'
+        imagen_url: '/vehicles/serie3-blue-front.jpg'
       },
       {
         id_modelo: modeloMap['BMW Serie 5'],
@@ -277,7 +277,7 @@ async function seedGrande() {
         kilometraje: 1600,
         precio: 79500.00,
         estado: 'Disponible',
-        imagen_url: 'https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=1200&q=80'
+        imagen_url: '/vehicles/serie5-front.jpg'
       }
     ];
 

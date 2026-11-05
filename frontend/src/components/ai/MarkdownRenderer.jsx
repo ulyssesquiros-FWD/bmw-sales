@@ -275,3 +275,4 @@ function renderInline(text) {
 
   return tokens.length > 0 ? tokens : text;
 }
+
