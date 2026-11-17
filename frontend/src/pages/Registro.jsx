@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { User, Mail, Lock, Eye, EyeOff, UserPlus, ArrowLeft } from 'lucide-react';
+import { User, Mail, Lock, Eye, EyeOff, UserPlus, ArrowLeft, Building2 } from 'lucide-react';
 import { BmwRoundel, BmwMEmblem } from '../components/common/BmwLogos';
 import AlertBanner from '../components/common/AlertBanner';
 import { useAuth } from '../context/AuthContext';
@@ -15,6 +15,8 @@ export default function Registro() {
   const [formData, setFormData] = useState({
     nombre: '',
     correo: '',
+    empresa_nombre: '',
+    plan: 'Gratis',
     password: '',
     confirmPassword: ''
   });
@@ -85,7 +87,9 @@ export default function Registro() {
       const res = await register({
         nombre: formData.nombre,
         correo: formData.correo,
-        password: formData.password
+        password: formData.password,
+        empresa_nombre: formData.empresa_nombre,
+        plan: formData.plan
       });
 
       setSessionNotice({
@@ -183,6 +187,45 @@ export default function Registro() {
             </div>
             {fieldErrors.correo && <span className="field-error">{fieldErrors.correo}</span>}
           </div>
+
+          <div className="form-group">
+            <label className="form-label" htmlFor="reg-empresa">
+              <span>Empresa (opcional para nuevo tenant PolicyBot)</span>
+            </label>
+            <div className="auth-input-wrap">
+              <Building2 size={17} className="auth-input-icon" aria-hidden="true" />
+              <input
+                id="reg-empresa"
+                name="empresa_nombre"
+                type="text"
+                maxLength={150}
+                className="form-control auth-input"
+                placeholder="Ej. Café Montaña S.A. (vacío = BMW Corporativo)"
+                value={formData.empresa_nombre}
+                onChange={handleChange}
+                disabled={loading}
+              />
+            </div>
+          </div>
+
+          {formData.empresa_nombre.trim() && (
+            <div className="form-group">
+              <label className="form-label" htmlFor="reg-plan">
+                <span>Plan SaaS Inicial</span>
+              </label>
+              <select
+                id="reg-plan"
+                name="plan"
+                className="form-control"
+                value={formData.plan}
+                onChange={handleChange}
+                disabled={loading}
+              >
+                <option value="Gratis">Gratis (10 documentos · 200 preguntas/mes)</option>
+                <option value="Pro">Pro (500 documentos · 10,000 preguntas/mes)</option>
+              </select>
+            </div>
+          )}
 
           <div className="form-group">
             <label className="form-label" htmlFor="reg-password">

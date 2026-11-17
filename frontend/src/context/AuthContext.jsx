@@ -73,13 +73,15 @@ export function AuthProvider({ children }) {
     }
   }, []);
 
-  const register = useCallback(async ({ nombre, correo, password }) => {
+  const register = useCallback(async ({ nombre, correo, password, empresa_nombre, plan }) => {
     setLoading(true);
     try {
       const response = await authService.register({
         nombre: nombre.trim(),
         correo: correo.trim().toLowerCase(),
-        password
+        password,
+        empresa_nombre,
+        plan
       });
       return response;
     } finally {

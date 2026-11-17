@@ -28,6 +28,10 @@ const encuestaSatisfaccionRoutes = require('./routes/encuestaSatisfaccionRoutes'
 const almacenRefaccionRoutes = require('./routes/almacenRefaccionRoutes');
 const reclamacionGarantiaRoutes = require('./routes/reclamacionGarantiaRoutes');
 const aiRoutes = require('./routes/aiRoutes');
+const empresaRoutes = require('./routes/empresaRoutes');
+const documentoRoutes = require('./routes/documentoRoutes');
+const driveRoutes = require('./routes/driveRoutes');
+const chatRoutes = require('./routes/chatRoutes');
 const authMiddleware = require('./middleware/authMiddleware');
 const { AppError, notFoundHandler, errorHandler } = require('./middleware/errorHandler');
 
@@ -152,6 +156,12 @@ app.use('/api/encuestas-satisfaccion', authMiddleware, encuestaSatisfaccionRoute
 app.use('/api/almacen-refacciones', authMiddleware, almacenRefaccionRoutes);
 app.use('/api/reclamaciones-garantia', authMiddleware, reclamacionGarantiaRoutes);
 app.use('/api/ai', authMiddleware, aiRoutes);
+
+// Rutas SaaS multiempresa PolicyBot RAG sobre Google Drive (protegidas con JWT + empresa_id)
+app.use('/api/empresa', authMiddleware, empresaRoutes);
+app.use('/api/documentos', authMiddleware, documentoRoutes);
+app.use('/api/drive', driveRoutes);
+app.use('/api/chat', authMiddleware, chatRoutes);
 
 // Manejo de rutas inexistentes y errores centralizados
 app.use(notFoundHandler);

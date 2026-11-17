@@ -17,6 +17,7 @@ import PruebasManejo from '../pages/PruebasManejo';
 import SucursalesRed from '../pages/SucursalesRed';
 import ServiciosEmpresariales from '../pages/ServiciosEmpresariales';
 import AsistenteIA from '../pages/AsistenteIA';
+import PolicyBotSaaS from '../pages/PolicyBotSaaS';
 import NotFound from '../pages/NotFound';
 import { useAuth } from '../context/AuthContext';
 
@@ -65,6 +66,7 @@ export default function AppRoutes() {
 
           {/* Inteligencia de Negocio, Asistente IA & Ecosistema 360 */}
           <Route path="/asistente-ia" element={<AsistenteIA />} />
+          <Route path="/policybot" element={<PolicyBotSaaS />} />
           <Route path="/reportes" element={<ReportesAnalytics />} />
           <Route path="/ecosistema" element={<ServiciosEmpresariales />} />
 

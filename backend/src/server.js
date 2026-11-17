@@ -6,6 +6,7 @@ dotenv.config({ path: path.resolve(__dirname, '../.env') });
 const { validateJwtConfig } = require('./services/tokenService');
 const app = require('./app');
 const { pool, verifyDatabaseConnection, dbConfig } = require('./config/db');
+const { startHourlySyncJob, stopHourlySyncJob } = require('./services/googleDriveService');
 
 const PORT = Number(process.env.PORT) || 3001;
 
@@ -28,11 +29,14 @@ async function startServer() {
     const server = app.listen(PORT, () => {
       console.log(`[OK] API REST protegida ejecutándose en http://localhost:${PORT}`);
       console.log(`[OK] Endpoint de salud: http://localhost:${PORT}/api/health`);
+      startHourlySyncJob();
+      console.log('[OK] Cron horario de sincronización Google Drive (0 * * * *) activo.');
       console.log('============================================================');
     });
 
     const shutdown = async (signal) => {
       console.log(`\n[INFO] Señal ${signal} recibida. Cerrando servidor y conexiones MySQL...`);
+      stopHourlySyncJob();
       server.close(async () => {
         await pool.end();
         console.log('[OK] Recursos liberados correctamente.');

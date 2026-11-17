@@ -56,7 +56,17 @@ const registerValidationRules = [
     .withMessage('La contraseña es obligatoria.')
     .isLength({ min: 8 })
     .withMessage('La contraseña debe tener un mínimo de 8 caracteres.')
-    .custom(passwordMaxBytesRule)
+    .custom(passwordMaxBytesRule),
+  body('empresa_nombre')
+    .optional({ values: 'falsy' })
+    .isString()
+    .trim()
+    .isLength({ min: 2, max: 150 })
+    .withMessage('El nombre de la empresa debe tener entre 2 y 150 caracteres.'),
+  body('plan')
+    .optional({ values: 'falsy' })
+    .isIn(['Gratis', 'Pro', 'gratis', 'pro'])
+    .withMessage('El plan debe ser Gratis o Pro.')
 ];
 
 const loginValidationRules = [

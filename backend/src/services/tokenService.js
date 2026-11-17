@@ -44,18 +44,34 @@ function validateJwtConfig() {
 }
 
 /**
- * Genera un Access Token JWT firmado con HS256 conteniendo únicamente claims mínimos (sub, iss, aud, iat, exp).
+ * Genera un Access Token JWT firmado con HS256 conteniendo identificador mínimo,
+ * empresa_id (para aislamiento multiempresa) y rol del usuario.
+ * Acepta tanto un ID numérico (compatibilidad previa) como un objeto de usuario.
  */
-function generateAccessToken(idUsuario) {
+function generateAccessToken(userOrId, extraClaims = {}) {
   const { secret, expiresIn } = validateJwtConfig();
 
-  const token = jwt.sign({}, secret, {
-    algorithm: JWT_ALGORITHM,
-    expiresIn,
-    issuer: JWT_ISSUER,
-    audience: JWT_AUDIENCE,
-    subject: String(idUsuario)
-  });
+  const isObj = userOrId && typeof userOrId === 'object';
+  const idUsuario = isObj ? userOrId.id_usuario : userOrId;
+  const empresaId = Number(
+    (isObj ? userOrId.id_empresa ?? userOrId.empresa_id : extraClaims.empresa_id) ?? 1
+  );
+  const rol = String((isObj ? userOrId.rol : extraClaims.rol) || 'admin');
+
+  const token = jwt.sign(
+    {
+      empresa_id: empresaId,
+      rol
+    },
+    secret,
+    {
+      algorithm: JWT_ALGORITHM,
+      expiresIn,
+      issuer: JWT_ISSUER,
+      audience: JWT_AUDIENCE,
+      subject: String(idUsuario)
+    }
+  );
 
   return {
     token,

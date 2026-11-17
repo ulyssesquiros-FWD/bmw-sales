@@ -46,6 +46,100 @@ async function verifyTableExists(connection, databaseName, tableName) {
   return rows.length > 0;
 }
 
+async function verifyColumnExists(connection, databaseName, tableName, columnName) {
+  const [rows] = await connection.execute(
+    `SELECT COLUMN_NAME AS columnName
+     FROM information_schema.COLUMNS
+     WHERE TABLE_SCHEMA = ? AND LOWER(TABLE_NAME) = LOWER(?) AND LOWER(COLUMN_NAME) = LOWER(?)`,
+    [databaseName, tableName, columnName]
+  );
+  return rows.length > 0;
+}
+
+async function ensureUsuariosTenantColumns(connection, databaseName) {
+  const hasEmpresa = await verifyColumnExists(connection, databaseName, 'usuarios', 'id_empresa');
+  if (!hasEmpresa) {
+    console.log("  [MIGRACIÓN] Agregando columna 'id_empresa' a tabla 'usuarios'...");
+    await connection.query(
+      'ALTER TABLE usuarios ADD COLUMN id_empresa INT UNSIGNED NOT NULL DEFAULT 1 AFTER id_usuario'
+    );
+    await connection.query('ALTER TABLE usuarios ADD INDEX idx_usuarios_empresa (id_empresa)');
+    const empresasExists = await verifyTableExists(connection, databaseName, 'empresas');
+    if (empresasExists) {
+      await connection.query(
+        'ALTER TABLE usuarios ADD CONSTRAINT fk_usuarios_empresa FOREIGN KEY (id_empresa) REFERENCES empresas (id_empresa)'
+      );
+    }
+  }
+
+  const hasRol = await verifyColumnExists(connection, databaseName, 'usuarios', 'rol');
+  if (!hasRol) {
+    console.log("  [MIGRACIÓN] Agregando columna 'rol' a tabla 'usuarios'...");
+    await connection.query(
+      "ALTER TABLE usuarios ADD COLUMN rol ENUM('admin', 'colaborador') NOT NULL DEFAULT 'admin' AFTER password_hash"
+    );
+  }
+}
+
+async function verifyIndexExists(connection, databaseName, tableName, indexName) {
+  const [rows] = await connection.execute(
+    `SELECT INDEX_NAME AS indexName
+     FROM information_schema.STATISTICS
+     WHERE TABLE_SCHEMA = ? AND LOWER(TABLE_NAME) = LOWER(?) AND LOWER(INDEX_NAME) = LOWER(?)`,
+    [databaseName, tableName, indexName]
+  );
+  return rows.length > 0;
+}
+
+async function ensurePolicyBotV2Columns(connection, databaseName) {
+  const documentosExists = await verifyTableExists(connection, databaseName, 'documentos');
+  if (documentosExists) {
+    const hasMetodo = await verifyColumnExists(connection, databaseName, 'documentos', 'metodo_extraccion');
+    if (!hasMetodo) {
+      console.log("  [MIGRACIÓN] Agregando columna 'metodo_extraccion' a tabla 'documentos'...");
+      await connection.query(
+        "ALTER TABLE documentos ADD COLUMN metodo_extraccion VARCHAR(40) NOT NULL DEFAULT 'texto_nativo' AFTER estado_indexacion"
+      );
+    }
+  }
+
+  const fragmentosExists = await verifyTableExists(connection, databaseName, 'fragmentos');
+  if (fragmentosExists) {
+    const columnsToEnsure = [
+      {
+        name: 'embedding_model',
+        sql: "ALTER TABLE fragmentos ADD COLUMN embedding_model VARCHAR(100) NOT NULL DEFAULT 'Xenova/multilingual-e5-small' AFTER embedding_dim"
+      },
+      {
+        name: 'embedding_dimensions',
+        sql: 'ALTER TABLE fragmentos ADD COLUMN embedding_dimensions SMALLINT UNSIGNED NOT NULL DEFAULT 384 AFTER embedding_model'
+      },
+      {
+        name: 'embedding_version',
+        sql: "ALTER TABLE fragmentos ADD COLUMN embedding_version VARCHAR(32) NOT NULL DEFAULT 'multilingual-e5-small-v1' AFTER embedding_dimensions"
+      },
+      {
+        name: 'indexed_at',
+        sql: 'ALTER TABLE fragmentos ADD COLUMN indexed_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER embedding_version'
+      }
+    ];
+
+    for (const col of columnsToEnsure) {
+      const exists = await verifyColumnExists(connection, databaseName, 'fragmentos', col.name);
+      if (!exists) {
+        console.log(`  [MIGRACIÓN] Agregando columna '${col.name}' a tabla 'fragmentos'...`);
+        await connection.query(col.sql);
+      }
+    }
+
+    const hasFt = await verifyIndexExists(connection, databaseName, 'fragmentos', 'idx_fragmentos_contenido_ft');
+    if (!hasFt) {
+      console.log("  [MIGRACIÓN] Creando índice FULLTEXT 'idx_fragmentos_contenido_ft' en 'fragmentos'...");
+      await connection.query('ALTER TABLE fragmentos ADD FULLTEXT INDEX idx_fragmentos_contenido_ft (contenido)');
+    }
+  }
+}
+
 async function runMigrations() {
   const host = process.env.DB_HOST || 'localhost';
   const port = Number(process.env.DB_PORT) || 3306;
@@ -114,6 +208,9 @@ async function runMigrations() {
       console.log(`  [REGISTRADA] Migración '${fileName}' aplicada y registrada correctamente.`);
       appliedCount++;
     }
+
+    await ensureUsuariosTenantColumns(connection, database);
+    await ensurePolicyBotV2Columns(connection, database);
 
     // 4. Verificar explícitamente que la tabla 'usuarios' exista junto con las 5 tablas del Día 1
     const usuariosExists = await verifyTableExists(connection, database, 'usuarios');

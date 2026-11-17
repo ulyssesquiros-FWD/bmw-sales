@@ -3,6 +3,8 @@ const usuarioModel = require('../models/usuarioModel');
 
 function unauthorizedResponse(res) {
   return res.status(401).json({
+    ok: false,
+    success: false,
     error: 'No autorizado'
   });
 }
@@ -10,6 +12,7 @@ function unauthorizedResponse(res) {
 /**
  * Middleware de autenticación JWT.
  * Verifica formato Bearer, firma HS256, issuer, audience, expiración y existencia activa en MySQL.
+ * Deriva empresa_id y rol estrictamente desde el usuario verificado (nunca desde el frontend).
  */
 async function authMiddleware(req, res, next) {
   const authHeader = req.headers.authorization;
@@ -29,7 +32,6 @@ async function authMiddleware(req, res, next) {
   try {
     decoded = verifyAccessToken(token);
   } catch {
-    // No exponer detalles internos del token ni del error criptográfico
     return unauthorizedResponse(res);
   }
 
@@ -48,12 +50,24 @@ async function authMiddleware(req, res, next) {
       return unauthorizedResponse(res);
     }
 
+    const empresaId = Number(usuario.id_empresa || decoded.empresa_id || 1);
+    const rol = usuario.rol || decoded.rol || 'admin';
+
     req.user = {
       id_usuario: usuario.id_usuario,
       nombre: usuario.nombre,
       correo: usuario.correo,
+      id_empresa: empresaId,
+      empresa_id: empresaId,
+      rol,
+      empresa_nombre: usuario.empresa_nombre || 'BMW Premium Motors Corporativo',
+      id_plan: Number(usuario.id_plan || 2),
+      plan_nombre: usuario.plan_nombre || 'Pro',
+      max_documentos: Number(usuario.max_documentos || 500),
+      max_preguntas_mes: Number(usuario.max_preguntas_mes || 10000),
       fecha_creacion: usuario.fecha_creacion
     };
+    req.empresaId = empresaId;
 
     return next();
   } catch (dbError) {
@@ -62,4 +76,3 @@ async function authMiddleware(req, res, next) {
 }
 
 module.exports = authMiddleware;
-

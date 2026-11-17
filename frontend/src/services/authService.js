@@ -1,12 +1,13 @@
 import api from './api';
 
 export const authService = {
-  async register({ nombre, correo, password }) {
-    const { data } = await api.post('/auth/register', {
-      nombre,
-      correo,
-      password
-    });
+  async register({ nombre, correo, password, empresa_nombre, plan }) {
+    const payload = { nombre, correo, password };
+    if (empresa_nombre && empresa_nombre.trim()) {
+      payload.empresa_nombre = empresa_nombre.trim();
+      payload.plan = plan || 'Gratis';
+    }
+    const { data } = await api.post('/auth/register', payload);
     return data;
   },
 

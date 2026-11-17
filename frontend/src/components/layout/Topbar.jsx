@@ -99,6 +99,13 @@ export default function Topbar({ onToggleSidebar }) {
             <Sparkles size={13} style={{ marginRight: '4px' }} />
             Genius AI
           </NavLink>
+          <NavLink
+            to="/policybot"
+            className={({ isActive }) => `topbar-nav-item ${isActive ? 'active' : ''}`}
+            style={{ color: '#6ee7b7', fontWeight: 700 }}
+          >
+            PolicyBot RAG
+          </NavLink>
         </nav>
       </div>
 

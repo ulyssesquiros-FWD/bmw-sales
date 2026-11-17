@@ -9,6 +9,14 @@ frontend/node_modules/
 backend/.env
 frontend/.env
 
+# Google Service Account / External credentials & local ONNX cache
+*service-account*.json
+*credentials*.json
+google-drive-key.json
+backend/secrets/
+backend/.cache/
+.cache/
+
 # Build outputs
 frontend/dist/
 dist/

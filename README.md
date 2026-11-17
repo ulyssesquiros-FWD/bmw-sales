@@ -1,11 +1,13 @@
-# BMW Premium Motors — Sistema Empresarial Full Stack (26 Controladores & 24 Entidades MySQL + Agente DeepSeek AI)
+# BMW Premium Motors & PolicyBot SaaS — Sistema Empresarial Full Stack (DeepSeek + GPT-4o Vision + E5 Local + MySQL)
 
 [![GitHub Repository](https://img.shields.io/badge/GitHub-ulyssesquiros--FWD%2Fbmw--sales-181717?style=for-the-badge&logo=github)](https://github.com/ulyssesquiros-FWD/bmw-sales)
-[![DeepSeek](https://img.shields.io/badge/AI_Agent-DeepSeek_V3_%2F_Flash-4D6BFE?style=for-the-badge&logo=openai)](https://deepseek.com/)
+[![DeepSeek](https://img.shields.io/badge/AI_Generative-DeepSeek_Flash-4D6BFE?style=for-the-badge&logo=openai)](https://deepseek.com/)
+[![OpenAI Vision](https://img.shields.io/badge/Vision-GPT--4o_Vision-10A37F?style=for-the-badge&logo=openai)](https://openai.com/)
+[![Embeddings](https://img.shields.io/badge/Embeddings-multilingual--e5--small_384d-FFD21E?style=for-the-badge&logo=huggingface)](https://huggingface.co/Xenova/multilingual-e5-small)
 [![React](https://img.shields.io/badge/React_18-Vite_6-61DAFB?style=for-the-badge&logo=react)](https://react.dev/)
 [![Node.js](https://img.shields.io/badge/Node.js-Express_4-339933?style=for-the-badge&logo=node.js)](https://nodejs.org/)
-[![MySQL](https://img.shields.io/badge/MySQL-InnoDB_8.0-4479A1?style=for-the-badge&logo=mysql)](https://www.mysql.com/)
-[![JWT](https://img.shields.io/badge/Security-JWT_HS256_+_bcrypt_12-000000?style=for-the-badge&logo=jsonwebtokens)](https://jwt.io/)
+[![MySQL](https://img.shields.io/badge/Database-MySQL_8_Único-4479A1?style=for-the-badge&logo=mysql)](https://www.mysql.com/)
+[![JWT](https://img.shields.io/badge/Security-JWT_HS256_+_AES--256--GCM-000000?style=for-the-badge&logo=jsonwebtokens)](https://jwt.io/)
 
 ---
 
@@ -15,8 +17,12 @@ Para acceder al sistema a través de la interfaz web ([http://localhost:5173/log
 
 | Perfil | Correo Electrónico | Contraseña | Nivel de Acceso |
 | :--- | :--- | :--- | :--- |
-| **Usuario Ejecutivo (Ulysses)** | `ulysses@bmwpremiummotors.com` | `AdminBMW2026!` | Acceso Total (26 Controladores, 24 Entidades e IA) |
-| **Administrador General** | `admin@bmwpremiummotors.com` | `AdminBMW2026!` | Acceso Total (26 Controladores, 24 Entidades e IA) |
+| **Usuario Ejecutivo (Ulysses)** | `ulysses@bmwpremiummotors.com` | `AdminBMW2026!` | Admin Corporativo (26 Controladores BMW + PolicyBot) |
+| **Administrador General BMW** | `admin@bmwpremiummotors.com` | `AdminBMW2026!` | Admin Corporativo (26 Controladores BMW + PolicyBot) |
+| **Café Montaña S.A. (Admin · Gratis)** | `admin@cafemontana.com` | `AdminCafe2026!` | Admin PolicyBot (10 docs / 200 preguntas mes) |
+| **Café Montaña S.A. (Colaborador)** | `colab@cafemontana.com` | `ColabCafe2026!` | Colaborador PolicyBot (solo chat / HTTP 403 en carga) |
+| **Logística Pacífico (Admin · Pro)** | `admin@logisticapacifico.com` | `AdminLogistica2026!` | Admin PolicyBot (500 docs / 10,000 preguntas mes) |
+| **Logística Pacífico (Colaborador)** | `colab@logisticapacifico.com` | `ColabLogistica2026!` | Colaborador PolicyBot (solo chat / HTTP 403 en carga) |
 
 > **Nota de Seguridad:** Las contraseñas están almacenadas mediante hash adaptativo **`bcrypt` a 12 salt rounds**. Los tokens JWT emitidos se gestionan estrictamente en la memoria de la aplicación React (`AuthContext`), mitigando riesgos de almacenamiento inseguro en `localStorage` o `sessionStorage`.
 
@@ -124,6 +130,10 @@ Todos los endpoints empresariales requieren la cabecera `Authorization: Bearer <
 | 24 | `almacenRefaccionController.js` | `/api/almacen-refacciones` | `GET /`, `GET /:id`, `POST /` |
 | 25 | `reclamacionGarantiaController.js` | `/api/reclamaciones-garantia` | `GET /`, `GET /:id`, `POST /` (RMA ante BMW AG) |
 | 26 | `aiController.js` | `/api/ai` | `POST /chat`, `GET /sugerencias`, `GET /estado` (Motor DeepSeek AI) |
+| 27 | `empresaController.js` | `/api/empresa` | `GET /mi-empresa`, `PUT /plan`, `GET/POST/DELETE /colaboradores` (Multiempresa SaaS) |
+| 28 | `documentoController.js` | `/api/documentos` | `GET /`, `GET /:id`, `POST /upload`, `POST /:id/reindex`, `DELETE /:id` (PDF/DOCX/TXT/Imágenes + GPT-4o Vision) |
+| 29 | `driveController.js` | `/api/drive` | `GET /oauth`, `GET /oauth/callback`, `GET /status`, `POST /connect-folder`, `POST /sync`, `DELETE /disconnect` |
+| 30 | `chatController.js` | `/api/chat` | `POST /stream` (SSE DeepSeek RAG + E5 384 dims + Citas + HTTP 429), `GET/DELETE /historial` |
 
 ---
 
@@ -168,9 +178,19 @@ npm run db:init
 # 2. Aplica las migraciones incrementales de manera idempotente
 npm run db:migrate
 
-# 3. Poblar el catálogo completo de 24 tablas con datos auténticos BMW
+# 3. Poblar catálogo completo BMW + Empresas de prueba PolicyBot (Café Montaña S.A. y Logística Pacífico)
 npm run db:seed:all
 ```
+
+### Paso 4: Pruebas Automatizadas (Opcional pero Recomendado)
+```bash
+# Desde backend/ (requiere MySQL activo):
+node tests/acceptancePolicyBot.test.js
+node tests/securityAndRagPolicyBot.test.js
+node tests/officialSuite14.test.js
+```
+
+> **Arquitectura RAG Consolidada:** MySQL (`bmw_premium_motors`) es la única base de datos del sistema. Los vectores de 384 dimensiones de `Xenova/multilingual-e5-small` se almacenan en MySQL (`fragmentos`) con ranking coseno en Node.js; **DeepSeek (`deepseek-flash`)** impulsa las respuestas en streaming SSE, **OpenAI (`gpt-4o` Vision)** extrae contenido de PDFs escaneados o imágenes, y **Google Drive OAuth 2.0** cifra los tokens con `AES-256-GCM`. Consulte [`PLAN_ADAPTACION.md`](./PLAN_ADAPTACION.md) para ver cómo obtener cada clave de `backend/.env.example`.
 
 ### Paso 4: Iniciar el Servidor Backend
 ```bash
@@ -209,6 +229,7 @@ La aplicación cuenta con una barra de navegación organizada por departamentos:
 │   ├── /financiamiento    -> Simulador Financiero BMW Select & Líneas de Crédito
 │   └── /sucursales        -> Directorio de Agencias Masaryk, Santa Fe, MTY, GDL, etc.
 └── INTELIGENCIA & GESTIÓN
+    ├── /policybot         -> PolicyBot RAG SaaS Multiempresa (Chat SSE, Documentos, Drive, Plan)
     ├── /asistente-ia      -> BMW Genius AI Advisor (DeepSeek V3 / Flash con RAG de BD en Vivo)
     ├── /reportes          -> Business Intelligence, Rendimiento Asesores & Exportador CSV
     └── /ecosistema        -> Ecosistema 360° con Pestañas para las 24 Entidades
@@ -224,6 +245,8 @@ En la carpeta [`docs/`](./docs/) se encuentran disponibles los informes de arqui
 - **Investigación de Seguridad JWT:** [`docs/investigacion-jwt.md`](./docs/investigacion-jwt.md)
 - **Diagrama Entidad-Relación Consolidado:** [`docs/DER-dia-2.md`](./docs/DER-dia-2.md)
 - **Auditoría Integral de Código:** [`docs/auditoria/AUDITORIA_GENERAL.md`](./docs/auditoria/AUDITORIA_GENERAL.md)
+- **Auditoría & Plan PolicyBot:** [`AUDITORIA_PROYECTO.md`](./AUDITORIA_PROYECTO.md), [`PLAN_ADAPTACION.md`](./PLAN_ADAPTACION.md), [`DECISIONES_Y_COSTOS.md`](./DECISIONES_Y_COSTOS.md) y [`RESULTADOS_PRUEBAS.md`](./RESULTADOS_PRUEBAS.md)
+- **ADRs de Gobernanza IA:** [`docs/adr/README.md`](./docs/adr/README.md) (`0001` a `0007`)
 - **Colección Postman de Pruebas:** [`docs/postman/BMW-Premium-Motors-Dia2.postman_collection.json`](./docs/postman/BMW-Premium-Motors-Dia2.postman_collection.json)
 
 ---

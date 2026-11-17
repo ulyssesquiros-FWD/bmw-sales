@@ -11,17 +11,25 @@
     "db:seed:modulos": "node src/database/seedModulosAdicionales.js",
     "db:seed:grande": "node src/database/seedGrande.js",
     "db:seed:nuevas": "node src/database/seedNuevasEntidades.js",
-    "db:seed:all": "node src/database/seedModulosAdicionales.js && node src/database/seedGrande.js && node src/database/seedNuevasEntidades.js"
+    "db:seed:policybot": "node src/database/seedPolicyBot.js",
+    "db:seed:all": "node src/database/seedModulosAdicionales.js && node src/database/seedGrande.js && node src/database/seedNuevasEntidades.js && node src/database/seedPolicyBot.js"
   },
   "dependencies": {
+    "@huggingface/transformers": "^4.3.2",
     "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "express-rate-limit": "^8.7.3",
     "express-validator": "^7.2.1",
+    "googleapis": "^190.0.0",
     "helmet": "^8.0.0",
     "jsonwebtoken": "^9.0.3",
-    "mysql2": "^3.12.0"
+    "mammoth": "^1.13.0",
+    "multer": "^2.5.0",
+    "mysql2": "^3.12.0",
+    "node-cron": "^4.6.0",
+    "unpdf": "^1.9.1"
   }
 }

@@ -49,6 +49,7 @@ const NAV_GROUPS = [
   {
     titulo: 'Inteligencia & BI',
     items: [
+      { to: '/policybot', label: 'PolicyBot RAG SaaS (Drive)', icon: ShieldCheck },
       { to: '/asistente-ia', label: 'BMW Genius AI (DeepSeek)', icon: Cpu },
       { to: '/reportes', label: 'Reportes & Analytics BI', icon: BarChart3 },
       { to: '/ecosistema', label: 'Ecosistema Integral 360°', icon: ShieldCheck }
